@@ -1,18 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Flex, Grid, Heading, Text, Button, Image, VStack, useColorModeValue, Container } from "@chakra-ui/react";
 import { FaShoppingCart, FaSearch } from "react-icons/fa";
 
-const plushies = [
-  { id: 1, name: "Teddy Bear", price: "29.99", image: 'https://images.unsplash.com/photo-1564470939458-1289338e2d85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHx0ZWRkeSUyMGJlYXIlMjBwbHVzaGllfGVufDB8fHx8MTcwOTYzMzEwOHww&ixlib=rb-4.0.3&q=80&w=1080' },
-  { id: 2, name: "Rabbit", price: "19.99", image: 'https://images.unsplash.com/photo-1652636347412-46f47856f540?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxyYWJiaXQlMjBwbHVzaGllfGVufDB8fHx8MTcwOTYzMzEwOXww&ixlib=rb-4.0.3&q=80&w=1080' },
-  { id: 3, name: "Unicorn", price: "24.99", image: 'https://images.unsplash.com/photo-1564470939458-1289338e2d85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHx1bmljb3JuJTIwcGx1c2hpZXxlbnwwfHx8fDE3MDk2MzMxMDl8MA&ixlib=rb-4.0.3&q=80&w=1080' },
-  { id: 4, name: "Dragon", price: "34.99", image: 'https://images.unsplash.com/photo-1616262373426-18bfa28bafab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxkcmFnb24lMjBwbHVzaGllfGVufDB8fHx8MTcwOTYzMzEwOXww&ixlib=rb-4.0.3&q=80&w=1080' },
-  // ... add more plushies as needed
-];
+// Simulate a fetch plushies API call
+const fetchPlushies = () => {
+  return Promise.resolve([{ id: 1, name: "Teddy Bear", price: "29.99", image: "https://images.unsplash.com/photo-1564470939458-1289338e2d85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHx0ZWRkeSUyMGJlYXIlMjBwbHVzaGllfGVufDB8fHx8MTcwOTYzMzEwOHww&ixlib=rb-4.0.3&q=80&w=1080" }]);
+};
+
+const login = (username, password) => {
+  console.log("Logging in", username, password);
+  return Promise.resolve({ token: "fake-jwt-token" });
+};
 
 const Index = () => {
+  const [plushies, setPlushies] = useState([]);
   const bg = useColorModeValue("gray.100", "gray.700");
   const color = useColorModeValue("gray.800", "white");
+
+  useEffect(() => {
+    fetchPlushies().then((data) => {
+      setPlushies(data);
+    });
+  }, []);
 
   return (
     <Container maxW="container.xl" p={4}>
